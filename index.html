@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso 0.1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #62d8ec 0%, #db7bc6 100%);
+            color: #5a3e36;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding-bottom: 60px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+        }
+        
+        .heart-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #e84393;
+            font-size: 24px;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: #6d2c53;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #8a3a63;
+        }
+        
+        .cover-img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin: 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .counter {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .counter p {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+        
+        .counter .time {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #e84393;
+        }
+        
+        .timeline {
+            margin: 30px 0;
+        }
+        
+        .timeline-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #6d2c53;
+            font-size: 1.5rem;
+        }
+        
+        .timeline-item {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 15px;
+            margin: 15px 0;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            height: 100%;
+            width: 5px;
+            background: #e84393;
+            left: 0;
+            top: 0;
+            border-radius: 10px 0 0 10px;
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: #e84393;
+            margin-bottom: 5px;
+        }
+        
+        .gallery {
+            margin: 30px 0;
+        }
+        
+        .gallery-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #6d2c53;
+            font-size: 1.5rem;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .gallery-item {
+            height: 150px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .message {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .message-title {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #6d2c53;
+        }
+        
+        .message-content {
+            line-height: 1.6;
+            text-align: justify;
+        }
+        
+        .love-button {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 12px;
+            background: #e84393;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, background 0.3s;
+        }
+        
+        .love-button:hover {
+            transform: scale(1.05);
+            background: #d63384;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #6d2c53;
+            font-size: 0.9rem;
+        }
+        
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0;
+            color: #e84393;
+            animation: fall 5s linear infinite;
+        }
+        
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Efeito de batida de coração */
+        .heartbeat {
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            15% { transform: scale(1.3); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.3); }
+            60% { transform: scale(1); }
+        }
+        
+        /* Responsividade adicional */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .cover-img {
+                height: 200px;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts-container" id="hearts-container"></div>
+    
+    <div class="container">
+        <header>
+            <i class="fas fa-heart heart-icon"></i>
+            <h1>Nosso Primeiro Mês</h1>
+            <p class="subtitle">Uma celebração do nosso amor</p>
+            <img src="glr/MS ghibli.png" alt="Nossa foto" class="cover-img">
+        </header>
+        
+        <div class="counter">
+            <p>Estamos namorando há exatamente:</p>
+            <div class="time" id="time-counter">1 mês, 0 dias, 0 horas, 0 minutos</div>
+        </div>
+        
+        <button class="love-button" id="love-button">
+            <i class="fas fa-heart"></i> Clique para um beijo
+        </button>
+        
+        <!-- Áudio do beijo (usando um som de beijo do Pixabay) -->
+        <audio id="kiss-sound" preload="auto">
+            <source src="glr/muac.m4a" type="audio/mpeg">
+            Seu navegador não suporta o elemento de áudio.
+        </audio>
+        
+        <div class="timeline">
+            <h2 class="timeline-title">Nossa Linha do Tempo</h2>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">Primeiras Interações</div>
+                <p>Os dias em que nos conhecemos melhor, quando nós começamos a conversar melhor láaa no começo</p>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">Nossas primeiras conversas</div>
+                <p>A gente falava sobre nossos bixin, a gnt mandava nossas skins um pro outro, a gnt falava sobre uns anime tbm, vc me falava sobre os vestidos q vc queria, era mt foda</p>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">Nosso Primeiro Anime</div>
+                <p>Da pra dizer que foi né, Yamada-kun, o primeiro anime que vimos "indiretamente" juntos</p>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">Filmes</div>
+                <p>A gnt viu vários filmes nesses tempos... orgulho e preconceito, freira 1 e 2, diários de uma paixão, saudades</p>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">Nós juntinhos</div>
+                <p>Dia 16/07 foi quando nós fomos catálogo juntos pela primeira vez e fizemos umonte de skins juntos... E 1 dia dps fomos pra vários jogos juntos, inclusive fazendo aqueles desenhos lá. E dia 28/07 foi quando fizemos aquela skin combinando de cabelo verde e roxo</p>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">Dia do pedido</div>
+                <p>E dia 03/08 foi quando eu pedi vc em namoro usando através do site que eu fiz, e você disse sim! 🥳</p>
+            </div>
+        </div>
+        
+        <div class="gallery">
+            <h2 class="gallery-title">Nossas Melhores Fotos</h2>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="glr/14.png" alt="Foto 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="glr/15.png" alt="Foto 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="glr/16.png" alt="Foto 3">
+                </div>
+                <div class="gallery-item">
+                    <img src="glr/2.png" alt="Foto 4">
+                </div>
+                 <div class="gallery-item">
+                    <img src="glr/8.png" alt="Foto 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="glr/21.png" alt="Foto 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="glr/20.png" alt="Foto 3">
+                </div>
+                <div class="gallery-item">
+                    <img src="glr/18.png" alt="Foto 4">
+                </div>
+            </div>
+        </div>
+        
+        <div class="message">
+            <h2 class="message-title">Mini cartinha</h2>
+            <div class="message-content">
+                <p>Meu amor, este primeiro mês ao seu lado foi incrível! Cada momento compartilhado, cada risada, cada conversa... Tudo ficará guardado no meu coração.</p>
+                <p>Você ilumina meus dias de uma forma que nunca imaginei possível. Mal posso esperar para viver muitos outros meses ao seu lado, construindo nossa história juntos que nem um livro lindo de se ler.</p>
+                <p>Eu te amo mais do que as palavras podem expressar!</p>
+                <p>Não posso dizer q foi fácil, teve inúmeros contratempos, mas qual relacionamento já nasce inteiro? o importante é nós construirmos isso juntos.</p>
+                <p>Eu te amo minha labubu, meu diamante, minha açaízinha, minha vida! 💖</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Feito com ❤️ para minha amada sasah</p>
+        </div>
+    </div>
+
+    <script>
+    // Criar corações flutuantes
+    function createHeart() {
+        const heart = document.createElement('div');
+        heart.innerHTML = '❤️';
+        heart.classList.add('heart');
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+        heart.style.fontSize = Math.random() * 15 + 10 + 'px';
+        document.getElementById('hearts-container').appendChild(heart);
+        
+        setTimeout(() => {
+            heart.remove();
+        }, 5000);
+    }
+    
+    setInterval(createHeart, 300);
+    
+    // Atualizar contador de tempo
+    function updateTimeCounter() {
+        // Substitua pela data real do início do relacionamento
+        // Formato: Ano, Mês (0-11), Dia
+        const startDate = new Date(2025, 7, 4); 
+        
+        const now = new Date();
+        const diff = now - startDate;
+        
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        
+        const months = Math.floor(days / 30);
+        const remainingDays = days % 30;
+        
+        document.getElementById('time-counter').textContent = 
+            `${months} mês(es), ${remainingDays} dias, ${hours} horas, ${minutes} minutos`;
+    }
+    
+    // Atualizar inicialmente e a cada minuto
+    updateTimeCounter();
+    setInterval(updateTimeCounter, 60000);
+    
+    // Botão de amor com interação e som de beijo
+    const loveButton = document.getElementById('love-button');
+    const kissSound = document.getElementById('kiss-sound');
+    
+    loveButton.addEventListener('click', function() {
+        // Parar e reiniciar o som de beijo
+        kissSound.pause();
+        kissSound.currentTime = 0;
+        kissSound.play();
+        
+        // Mudar texto e cor do botão
+        this.innerHTML = '<i class="fas fa-heart"></i> Mwah! 💋';
+        this.style.background = '#d63384';
+        
+        // Adicionar efeito de batida de coração
+        this.classList.add('heartbeat');
+        
+        // Criar explosão de corações
+        for (let i = 0; i < 20; i++) {
+            createHeart();
+        }
+        
+        // Reverter após 2 segundos
+        setTimeout(() => {
+            this.innerHTML = '<i class="fas fa-heart"></i> Clique para um beijo';
+            this.style.background = '#e84393';
+            this.classList.remove('heartbeat');
+        }, 2000);
+    });
+    
+     // Efeito de digitação na mensagem - VERSÃO CORRIGIDA
+    function typeEffect() {
+        const messageElement = document.querySelector('.message-content');
+        const originalHTML = messageElement.innerHTML;
+        
+        // Extrair apenas o texto, sem as tags
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = originalHTML;
+        const originalText = tempDiv.textContent || tempDiv.innerText || '';
+        
+        // Limpar o conteúdo inicial
+        messageElement.innerHTML = '';
+        
+        let i = 0;
+        const speed = 50; // velocidade da digitação
+        
+        function typeWriter() {
+            if (i < originalText.length) {
+                // Adicionar caractere por caractere
+                messageElement.innerHTML += originalText.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            } else {
+                // Quando terminar de digitar, restaurar a formatação original
+                messageElement.innerHTML = originalHTML;
+            }
+        }
+        
+        typeWriter();
+    }
+    
+    // Iniciar efeito de digitação quando a página carregar
+    window.onload = function() {
+        setTimeout(typeEffect, 1000);
+    };
+</script>
+</body>
+</html>
